@@ -6,5 +6,3 @@ RUN apk add --no-cache python3 && \
 
 RUN pip3 install --upgrade pip setuptools hug && \
     rm -r /root/.cache
-
-RUN hug -v
