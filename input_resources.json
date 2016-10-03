@@ -1,0 +1,10 @@
+{  
+   "staging":[  
+      "user1:password123",
+      "user2:password321"
+   ],
+   "production":[  
+      "user3:password123",
+      "user4:password321"
+   ]
+}
