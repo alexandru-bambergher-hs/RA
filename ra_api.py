@@ -1,6 +1,8 @@
 # filename: ra_api.py
 """A basic (single function) API written using hug"""
 import hug
+import json
+
 
 sample_output1 =  [
    {
@@ -50,3 +52,16 @@ def lock(res, num:hug.types.number=1):
 def unlock(body):
     """Unlock resource(s) in json format!"""
     return body
+
+def is_json_valid(inputjson):
+    try:
+        json_object = json.loads(inputjson)
+    except ValueError:
+        return False
+    return True
+
+def json_to_dict(inputjson):
+    return json.loads(inputjson)
+
+def dict_to_json(inputdict):
+    return json.dumps(inputdict)
