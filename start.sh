@@ -11,4 +11,4 @@ if [ $STATUS -ne 0 ]; then
 fi
 
 # Run the container and give it a name so we can access it later.
-docker run --rm $TAG hug -v
+docker run -d -p 8000:8000 $TAG hug -f ra_api.py
