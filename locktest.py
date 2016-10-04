@@ -1,6 +1,24 @@
 from collections import defaultdict
 
-def lock_credentials(JSON_DATA, res_type = None, res_value = None):
+def freeup_resources(JSON_DATA):
+    for res_type in JSON_DATA.keys():
+        obj_type = JSON_DATA[res_type]
+        for res_value in obj_type.keys():
+            JSON_DATA[res_type][res_value]["status"] = "free"
+
+def lookup_resource(JSON_DATA, res_type = None, res_value = None):
+    if not JSON_DATA.get(res_type):
+        print("Resource type %s not defined" % res_type)
+        return {res_type:{res_value:{"status": "NA"}}}
+
+    if JSON_DATA[res_type].get(res_value):
+        print("Lookup resource %s and value %s" % (res_type,res_value))
+        return {res_type:{res_value:JSON_DATA[res_type][res_value]}}
+    else:
+        print("Resource %s not found" % res_value)
+        return {res_type:{res_value:{"status": "NA"}}}
+
+def lock_resource(JSON_DATA, res_type = None, res_value = None):
     if not JSON_DATA.get(res_type):
         print("Resource type %s not defined" % res_type)
         return {res_type:{res_value:{"status": "NA"}}}
@@ -21,7 +39,7 @@ def lock_credentials(JSON_DATA, res_type = None, res_value = None):
         print("Resource %s not found" % res_value)
         return {res_type:{res_value:{"status": "NA"}}}
 
-def unlock_credentials(JSON_DATA, res_type = None, res_value = None):
+def unlock_resource(JSON_DATA, res_type = None, res_value = None):
     if not JSON_DATA.get(res_type):
         print("Resource type %s not defined" % res_type)
         return {res_type:{res_value:{"status": "NA"}}}
