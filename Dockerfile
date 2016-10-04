@@ -8,3 +8,5 @@ RUN pip3 install --upgrade pip setuptools hug && \
     rm -r /root/.cache
 
 COPY ra_api.py .
+COPY locktest.py .
+COPY input_resources.json .
