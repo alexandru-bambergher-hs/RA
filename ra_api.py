@@ -1,7 +1,6 @@
 # filename: ra_api.py
 """A basic (single function) API written using hug"""
 import hug
-import json
 from locktest import *
 
 JSON_DATA = []
@@ -11,12 +10,11 @@ RESOURCE_JSON_FILE = 'input_resources.json'
 def get_json_data(api):
     """Load initial JSON data to the api on startup"""
     global JSON_DATA
-    with open(RESOURCE_JSON_FILE, encoding='utf-8') as data_file:
-        JSON_DATA = json.loads(data_file.read())
+    JSON_DATA = load_json_file(RESOURCE_JSON_FILE, JSON_DATA)
     freeup_resources(JSON_DATA)
 
 @hug.get()
-def info(res_type, res_value):
+def info(res_type=None, res_value=None):
     """Lookup a resources of certain type and value!"""
     return lookup_resource(JSON_DATA, res_type, res_value)
 
