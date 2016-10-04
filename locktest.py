@@ -12,6 +12,14 @@ def freeup_resources(JSON_DATA):
         for res_value in obj_type.keys():
             JSON_DATA[res_type][res_value]["status"] = "free"
 
+def find_res_name(JSON_DATA, res_match):
+    for res_type, res_value in JSON_DATA.items():
+        if res_type == res_match:
+            obj_type = JSON_DATA[res_type]
+            for res_value in obj_type.keys():
+                if JSON_DATA[res_type][res_value].get("status") == "free":
+                    return res_value
+
 def lookup_resource(JSON_DATA, res_type = None, res_value = None):
     if not res_type:
         return JSON_DATA
@@ -31,6 +39,9 @@ def lookup_resource(JSON_DATA, res_type = None, res_value = None):
         return {res_type:{res_value:{"status": "NA"}}}
 
 def lock_resource(JSON_DATA, res_type = None, res_value = None):
+    if not res_value and res_type:
+        res_value = find_res_name(JSON_DATA, res_type)
+
     if not JSON_DATA.get(res_type):
         print("Resource type %s not defined" % res_type)
         return {res_type:{res_value:{"status": "NA"}}}

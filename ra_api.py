@@ -14,12 +14,12 @@ def get_json_data(api):
     freeup_resources(JSON_DATA)
 
 @hug.get()
-def info(res_type=None, res_value=None):
+def info(res_type:hug.types.text=None, res_value:hug.types.text=None):
     """Lookup a resources of certain type and value!"""
     return lookup_resource(JSON_DATA, res_type, res_value)
 
 @hug.get()
-def lock(res_type, res_value):
+def lock(res_type, res_value:hug.types.text=None):
     """Lock a number of resources of certain type and value!"""
     return lock_resource(JSON_DATA, res_type, res_value)
 
