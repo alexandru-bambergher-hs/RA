@@ -3,6 +3,8 @@
 import hug
 import json
 
+JSON_DATA = []
+RESOURCE_JSON_FILE = 'input_resources.json'
 
 sample_output1 =  [
    {
@@ -38,6 +40,13 @@ sample_output3 =  [
    }
 ]
 
+@hug.startup()
+def lock(api):
+    """Load initial JSON data to the api on startup"""
+    global JSON_DATA
+    with open(RESOURCE_JSON_FILE, encoding='utf-8') as data_file:
+        JSON_DATA = json.loads(data_file.read())
+
 @hug.get()
 def lock(res, num:hug.types.number=1):
     """Lock a number of resources of certain type!"""
@@ -45,8 +54,10 @@ def lock(res, num:hug.types.number=1):
         return sample_output3
     elif num == 2:
         return sample_output2
-    else:
+    elif num == 1:
         return sample_output1
+    else:
+        return JSON_DATA
 
 @hug.post()
 def unlock(body):
