@@ -1,10 +1,35 @@
 {
   "staging":{
-    "user1": {"resource": ""},
-    "empty": {}
+    "user1":{
+      "resource":""
+    },
+    "empty":{
+
+    },
+    "user2":{
+      "password":"test123"
+    },
+    "user3":{
+      "password":"test456",
+      "encryption":"base64"
+    },
+    "user4":{  
+      "password":"test789",
+      "encryption":"md5"
+    }
   },
-   "production":{
-    "user3": {"resource": "pass3"},
-    "user4": {"resource": "pass4", "resource": "pass5"}
+  "production":{
+    "user3":{
+      "resource":"pass3"
+    },
+    "user4":{
+      "resource":"pass4"
+    },
+    "user5":{
+      "firstname":"Bitt",
+      "lastname":"Brad",
+      "password":"secret",
+      "encryption":"md5"
+    }
   }
 }
